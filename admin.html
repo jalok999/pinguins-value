@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/webp" href="icon.webp">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penguin Values - Admin Panel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">🐧 PENGUIN <span>ADMIN</span></div>
+    <nav>
+        <a href="strona.html">Home</a>
+        <a href="strona.html">Values</a>
+    </nav>
+</header>
+
+
+<main class="admin-container">
+
+    <!-- LOGIN -->
+    <section id="loginSection" class="admin-card">
+        <h1>🐧 ADMIN LOGIN</h1>
+        <p class="admin-subtitle">Penguin Values secure access</p>
+
+        <form id="loginForm">
+            <label>Email</label>
+            <input
+                type="email"
+                id="loginEmail"
+                placeholder="Your admin email"
+                required
+            >
+
+            <label>Password</label>
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Your password"
+                required
+            >
+
+            <button type="submit" class="admin-save">
+                LOGIN
+            </button>
+
+            <p id="loginMessage" role="status"></p>
+        </form>
+    </section>
+
+    <!-- ADMIN DASHBOARD -->
+    <section id="adminApp" hidden>
+
+        <h1>🐧 Admin Panel</h1>
+        <p class="admin-subtitle">Manage Penguin Values database</p>
+
+        <button id="logoutButton" class="admin-cancel">
+            LOGOUT
+        </button>
+
+        <section class="admin-card">
+            <h2 id="formTitle">Add New Pet</h2>
+
+            <form id="petForm">
+
+                <label>Pet Name</label>
+                <input id="petName" type="text"
+                    placeholder="Huge Penguin" required>
+                <label>Pet Image URL</label>
+                <input id="petImage" type="url"
+                    placeholder="https://example.com/pet.png">
+
+                <label>Rarity</label>
+                <select id="petRarity">
+                    <option value="Huge">Huge</option>
+                    <option value="Titanic">Titanic</option>
+                </select>
+
+                <label>Gems Value</label>
+                <input id="petGems" type="number"
+                    min="0" max="9007199254740991" step="1" required>
+
+                <label>RAP Value</label>
+                <input id="petRap" type="number"
+                    min="0" max="9007199254740991" step="1" required>
+
+                <div class="admin-buttons">
+                    <button type="submit" class="admin-save" id="saveButton">
+                        ADD PET
+                    </button>
+
+                    <button type="button" class="admin-cancel"
+                        id="cancelEdit" hidden>
+                        CANCEL
+                    </button>
+                </div>
+
+                <p id="adminMessage" role="status"></p>
+            </form>
+        </section>
+
+        <section class="admin-card">
+            <h2>Pet Database</h2>
+
+            <input type="text" id="adminSearch"
+                placeholder="Search pets...">
+
+            <div id="adminPetList" class="admin-pet-list"></div>
+        </section>
+
+    </section>
+</main>
+
+
+</main>
+
+<footer>
+    © 2026 PENGUIN VALUES
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>

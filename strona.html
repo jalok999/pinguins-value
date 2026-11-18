@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/webp" href="icon.webp">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Penguin Values</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <img src="icon.webp" alt="Penguin Studio" class="logo-img">
+        <div>PENGUIN <span>VALUES</span></div>
+    </div>
+
+    <nav>
+            <a href="index.html">Home</a>
+            <a href="#values">Values</a>
+            <a href="admin.html">Admin Panel</a>
+    </nav>
+</header>
+<button id="themeToggle" class="theme-toggle" type="button">
+    🌙
+</button>
+<section class="hero">
+    <h1>PENGUIN VALUES</h1>
+    <p>The ultimate Pet Simulator X value list.</p>
+</section>
+
+<section class="stats">
+    <div class="stat">
+        <h2 id="totalPets">0</h2>
+        <p>TOTAL PETS</p>
+    </div>
+
+    <div class="stat">
+        <h2>2</h2>
+        <p>VALUE TYPES</p>
+    </div>
+
+    <div class="stat">
+        <h2><img src="icon.webp" alt="" style="height:32px;border-radius:8px;"></h2>
+        <p>PENGUIN VALUES</p>
+    </div>
+</section>
+
+<main class="container" id="values">
+
+    <div class="controls">
+        <input
+            type="text"
+            id="search"
+            placeholder="🔍 Search for a pet..."
+        >
+
+        <select id="rarity">
+            <option value="All">All pets</option>
+            <option value="Huge">Huge</option>
+            <option value="Titanic">Titanic</option>
+        </select>
+
+        <select id="sort">
+            <option value="default">Default sorting</option>
+            <option value="gems">Highest Gems</option>
+            <option value="rap">Highest RAP</option>
+        </select>
+    </div>
+
+        <div id="petList"></div>
+
+</main>
+
+<footer id="about">
+    © 2026 PENGUIN VALUES | Fan-made project
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
