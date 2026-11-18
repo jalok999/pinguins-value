@@ -1,4 +1,3 @@
-
 // ==========================================
 // PENGUIN VALUES - SUPABASE SYSTEM
 // ==========================================
@@ -102,6 +101,7 @@ function renderPets() {
                     ? `<img src="${escapeHTML(pet.image_url)}"
                          alt="${escapeHTML(pet.name)}"
                          loading="lazy"
+                         referrerpolicy="no-referrer"
                          onerror="this.style.display='none'">`
                     : `<div class="no-image">🐧</div>`
                 }
@@ -171,45 +171,30 @@ if (loginForm) {
         showMessage("loginMessage", "Logging in...");
 
         try {
-    const { data, error } = await db.auth.signInWithPassword({
-        email,
-        password
-    });
+            const { data, error } = await db.auth.signInWithPassword({
+                email,
+                password
+            });
 
-    if (error) {
-        showMessage("loginMessage", "Login failed: " + error.message);
-        return;
-    }
+            if (error) {
+                showMessage("loginMessage", "Login failed: " + error.message);
+                return;
+            }
 
-    if (!showAdminDashboard(data.user)) {
-        await db.auth.signOut();
-        return;
-    }
+            if (!showAdminDashboard(data.user)) {
+                await db.auth.signOut();
+                return;
+            }
 
-    showMessage("loginMessage", "");
-    loginForm.reset();
+            showMessage("loginMessage", "");
+            loginForm.reset();
 
-    await loadPets();
+            await loadPets();
 
-} catch (err) {
-    showMessage("loginMessage", "Connection error: " + err.message);
-    console.error(err);
-}
-
-        if (error) {
-            showMessage("loginMessage", "Login failed: " + error.message);
-            return;
+        } catch (err) {
+            showMessage("loginMessage", "Connection error: " + err.message);
+            console.error(err);
         }
-
-        if (!showAdminDashboard(data.user)) {
-            await db.auth.signOut();
-            return;
-        }
-
-        showMessage("loginMessage", "");
-        loginForm.reset();
-
-        await loadPets();
     });
 }
 
@@ -467,7 +452,10 @@ if (!db) {
 } else {
     loadPets();
 }
+
+// ==========================================
 // LIGHT / DARK MODE
+// ==========================================
 
 const themeToggle = document.getElementById("themeToggle");
 
@@ -493,6 +481,7 @@ if (themeToggle) {
         applyTheme(nextTheme);
     });
 }
+
 // ==========================================
 // IMAGE SEARCHER (Pet Simulator wiki)
 // ==========================================
@@ -597,11 +586,10 @@ function setupImageSearcher() {
 
             results.innerHTML = images.map(img => `
                 <button type="button" class="image-result" data-url="${escapeHTML(img.url)}">
-                    <img src="${escapeHTML(img.url)}" alt="" loading="lazy">
+                    <img src="${escapeHTML(img.url)}" alt="" loading="lazy" referrerpolicy="no-referrer">
                     <span>${escapeHTML(img.title.replace(/\(.*\)/, ""))}</span>
                 </button>
             `).join("") || "<p>No images found.</p>";
-
 
         } catch (err) {
             console.error(err);
