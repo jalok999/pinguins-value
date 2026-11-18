@@ -101,6 +101,7 @@ function renderPets() {
                     ? `<img src="${escapeHTML(pet.image_url)}"
                          alt="${escapeHTML(pet.name)}"
                          loading="lazy"
+                         referrerpolicy="no-referrer"
                          onerror="this.style.display='none'">`
                     : `<div class="no-image">🐧</div>`
                 }
@@ -452,7 +453,9 @@ if (!db) {
     loadPets();
 }
 
+// ==========================================
 // LIGHT / DARK MODE
+// ==========================================
 
 const themeToggle = document.getElementById("themeToggle");
 
@@ -583,7 +586,7 @@ function setupImageSearcher() {
 
             results.innerHTML = images.map(img => `
                 <button type="button" class="image-result" data-url="${escapeHTML(img.url)}">
-                    <img src="${escapeHTML(img.url)}" alt="" loading="lazy">
+                    <img src="${escapeHTML(img.url)}" alt="" loading="lazy" referrerpolicy="no-referrer">
                     <span>${escapeHTML(img.title.replace(/\(.*\)/, ""))}</span>
                 </button>
             `).join("") || "<p>No images found.</p>";
