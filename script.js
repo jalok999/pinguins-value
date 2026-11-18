@@ -602,6 +602,7 @@ function setupImageSearcher() {
                 </button>
             `).join("") || "<p>No images found.</p>";
 
+
         } catch (err) {
             console.error(err);
             results.innerHTML = "<p>Search failed. Check the console (F12).</p>";
