@@ -36,6 +36,15 @@ function escapeHTML(value) {
     })[char]);
 }
 
+function proxyImageUrl(url) {
+    if (!url) return "";
+    if (url.includes("wikia.nocookie.net") || url.includes("fandom.com")) {
+        const cleanUrl = url.split("/revision/")[0];
+        return "https://wsrv.nl/?url=" + encodeURIComponent(cleanUrl) + "&w=300&output=webp";
+    }
+    return url;
+}
+
 function showMessage(elementId, message) {
     const element = document.getElementById(elementId);
     if (element) element.textContent = message;
@@ -98,11 +107,10 @@ function renderPets() {
             <div class="pet-image">
                 ${
                     pet.image_url
-                    ? `<img src="${escapeHTML(pet.image_url)}"
+                    ? `<img src="${escapeHTML(proxyImageUrl(pet.image_url))}"
                          alt="${escapeHTML(pet.name)}"
                          loading="lazy"
-                         referrerpolicy="no-referrer"
-                         onerror="this.style.display='none'">`
+                         onerror="this.outerHTML='<div class=\'no-image\'>🐧</div>'">`
                     : `<div class="no-image">🐧</div>`
                 }
             </div>
@@ -585,8 +593,8 @@ function setupImageSearcher() {
             const images = await getThumbnails(matches);
 
             results.innerHTML = images.map(img => `
-                <button type="button" class="image-result" data-url="${escapeHTML(img.url)}">
-                    <img src="${escapeHTML(img.url)}" alt="" loading="lazy" referrerpolicy="no-referrer">
+                <button type="button" class="image-result" data-url="${escapeHTML(proxyImageUrl(img.url))}">
+                    <img src="${escapeHTML(proxyImageUrl(img.url))}" alt="" loading="lazy">
                     <span>${escapeHTML(img.title.replace(/\(.*\)/, ""))}</span>
                 </button>
             `).join("") || "<p>No images found.</p>";
